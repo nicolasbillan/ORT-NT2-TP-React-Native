@@ -1,5 +1,12 @@
 # ORT-NT2-TP-React-Native
 
+Integrantes:
+- Nicolas Billán Danylyszyn
+- Ignacio Giss
+
+Grupo:
+- FitnessApp
+
 Alcance:
 
 - Login y autenticación de usuario
