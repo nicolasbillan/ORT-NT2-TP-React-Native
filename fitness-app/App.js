@@ -1,25 +1,46 @@
-import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import LoginScreen from "./components/screens/LoginScreen";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import LoginNav from "./components/screens/login/LoginNav"
 import TabsScreen from "./components/screens/TabsScreen";
+import React, { useReducer, useEffect } from 'react';
+import GlobalContext from './Context'
+import {Datos, reducer} from './reducer'
+
 
 const Stack = createNativeStackNavigator();
 
+
+
 export default function App() {
-  return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName='Login'>
-        <Stack.Screen name='Login' component={LoginScreen}></Stack.Screen>
-        <Stack.Screen
-          options={{
-            headerShown: false,
-          }}
-          name='Main'
-          component={TabsScreen}
-        ></Stack.Screen>
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
+
+  const [state,dispatch ] = useReducer(reducer, Datos)
+
+  useEffect(() => {
+    const data = AsyncStorage.getItem('token').then(
+        (data)=>{console.log("devuelve data",data)
+        if (data) {
+          const jsonData = JSON.parse(data)
+          dispatch({'type':'LOGIN', payload:{'email':jsonData.email, 'token':jsonData.token}})
+        }
+           
+        })
+      },[])
+
+      return (
+        <GlobalContext.Provider value={{state,dispatch}}>
+          <NavigationContainer>
+            <Stack.Navigator 
+                screenOptions={{
+                  headerShown: false
+                }}
+            >
+              <Stack.Screen name="Login" component={LoginNav} />
+              <Stack.Screen name="childNav" component={TabsScreen} />
+    
+            </Stack.Navigator>
+          </NavigationContainer>
+        </GlobalContext.Provider>
+      );
 }
