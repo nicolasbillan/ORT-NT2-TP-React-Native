@@ -5,7 +5,8 @@ import { theme } from '../../core/theme'
 import {
   StartScreen,
   LoginScreen,
-  RegisterScreen
+  RegisterScreen,
+  ResetPasswordScreen
 } from '.'
 
 const Stack = createStackNavigator()
@@ -22,6 +23,7 @@ export default function App() {
           <Stack.Screen name="StartScreen" component={StartScreen} />
           <Stack.Screen name="LoginScreen" component={LoginScreen} />
           <Stack.Screen name="RegisterScreen" component={RegisterScreen} />
+          <Stack.Screen name="ResetPasswordScreen" component={ResetPasswordScreen} />
         </Stack.Navigator>
     </Provider>
   )
