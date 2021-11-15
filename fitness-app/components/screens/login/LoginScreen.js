@@ -65,7 +65,7 @@ export default function LoginScreen({ navigation }) {
         dispatch({'type':'LOGIN_AND_STORE', payload:{'email':email.value, 'token':jsonResp.token}})
         navigation.navigate("childNav")
     })
-    .catch( error => alert("Error:" + error))
+    .catch( e => setPassword({ ...password, error: "email o contraseña inválidos." }))
 
 }
 
