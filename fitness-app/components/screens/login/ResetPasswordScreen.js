@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
-import Background from './Background'
-import BackButton from './BackButton'
-import Logo from './Logo'
-import Header from './Header'
-import TextInput from './TextInput'
-import Button from './Button'
+import Background from '../../elements/Background'
+import BackButton from '../../elements/BackButton'
+import Logo from '../../elements/Logo'
+import Header from '../../elements/Header'
+import TextInput from '../../elements/TextInput'
+import Button from '../../elements/Button'
 import { emailValidator } from './helpers/emailValidator'
 
 export default function ResetPasswordScreen({ navigation }) {

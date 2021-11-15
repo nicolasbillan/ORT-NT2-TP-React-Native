@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { TouchableOpacity, StyleSheet, View } from 'react-native'
 import { Text } from 'react-native-paper'
-import Background from './Background'
-import Logo from './Logo'
-import Header from './Header'
-import Button from './Button'
-import TextInput from './TextInput'
-import BackButton from './BackButton'
+import Background from '../../elements/Background'
+import Logo from '../../elements/Logo'
+import Header from '../../elements/Header'
+import Button from '../../elements/Button'
+import TextInput from '../../elements/TextInput'
+import BackButton from '../../elements/BackButton'
 import { theme } from '../../core/theme'
 import { emailValidator } from './helpers/emailValidator'
 import { passwordValidator } from './helpers/passwordValidator'
@@ -65,7 +65,7 @@ export default function LoginScreen({ navigation }) {
         dispatch({'type':'LOGIN_AND_STORE', payload:{'email':email.value, 'token':jsonResp.token}})
         navigation.navigate("childNav")
     })
-    .catch( e => setPassword({ ...password, error: "email o contraseña inválidos." }))
+    .catch( e => setPassword({ ...password, error: "Email o contraseña inválidos." }))
 
 }
 

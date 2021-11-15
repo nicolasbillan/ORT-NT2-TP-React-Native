@@ -1,9 +1,9 @@
 import React, { useEffect, useContext } from 'react'
-import Background from './Background'
-import Logo from './Logo'
-import Header from './Header'
-import Button from './Button'
-import Paragraph from './Paragraph'
+import Background from '../../elements/Background'
+import Logo from '../../elements/Logo'
+import Header from '../../elements/Header'
+import Button from '../../elements/Button'
+import Paragraph from '../../elements/Paragraph'
 import GlobalContext from '../../../Context'
 
 export default function StartScreen({ navigation }) {
