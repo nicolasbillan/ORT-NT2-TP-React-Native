@@ -2,7 +2,7 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import LoginScreen from "./components/screens/LoginScreen";
+import LoginNav from "./components/screens/login/LoginNav"
 import TabsScreen from "./components/screens/TabsScreen";
 import React, { useReducer, useEffect } from 'react';
 import GlobalContext from './Context'
@@ -36,7 +36,7 @@ export default function App() {
                   headerShown: false
                 }}
             >
-              <Stack.Screen name="Login" component={LoginScreen} />
+              <Stack.Screen name="Login" component={LoginNav} />
               <Stack.Screen name="childNav" component={TabsScreen} />
     
             </Stack.Navigator>
