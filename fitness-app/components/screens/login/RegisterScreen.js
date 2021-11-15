@@ -44,7 +44,7 @@ export default function RegisterScreen({ navigation }) {
     const requestOptions = {
         method:"POST",
         headers:headers,
-        body: JSON.stringify({"email": email.value, "password": password.value})
+        body: JSON.stringify({"nombre": name.value, "email": email.value, "password": password.value})
       }
 
     return fetch('http://localhost:3000/api/users', requestOptions )
