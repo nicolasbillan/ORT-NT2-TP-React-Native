@@ -16,8 +16,10 @@ export default function RegisterScreen({ navigation }) {
   const [name, setName] = useState({ value: '', error: '' })
   const [email, setEmail] = useState({ value: '', error: '' })
   const [password, setPassword] = useState({ value: '', error: '' })
+  const [isDisabled, setIsDisabled] = useState(false)
+  
 
-  const onSignUpPressed = () => {
+  const onSignUpPressed = () => {    
     const nameError = nameValidator(name.value)
     const emailError = emailValidator(email.value)
     const passwordError = passwordValidator(password.value)
@@ -28,6 +30,7 @@ export default function RegisterScreen({ navigation }) {
       setPassword({ ...password, error: passwordError })
       return
     }
+    setIsDisabled(true)
     signup();
   }
 
@@ -58,7 +61,7 @@ export default function RegisterScreen({ navigation }) {
         navigation.navigate("LoginScreen")
     })
     .catch( error => alert("Error:" + error))
-
+    // TODO: use a snackbar to show error
 }
 
   return (
@@ -97,6 +100,7 @@ export default function RegisterScreen({ navigation }) {
       />
       <Button
         mode="contained"
+        disabled={isDisabled}
         onPress={onSignUpPressed}
         style={{ marginTop: 24 }}
       >
