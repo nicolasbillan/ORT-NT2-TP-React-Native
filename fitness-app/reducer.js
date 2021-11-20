@@ -19,6 +19,13 @@ const storeToken = async (email,value) => {
 
   }
 
+  const storeExercises = async(exercises) => {
+    try {
+      await AsyncStorage.setItem('exercises', JSON.stringify(exercises))
+    } catch (e) {
+      console.log("Error" + e)
+    }
+  }
  
  
   // Action tiene
@@ -37,6 +44,9 @@ export const reducer=(state, action) => {
             storeToken(null)
             return {...state, loggedIn:false, token:null}
 
+        case 'STORE_EXERCISES':
+          storeExercises(action.payload)
+          return {...state, exercises:action.payload}
     }
 
 }

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Provider } from 'react-native-paper'
 import { createStackNavigator } from '@react-navigation/stack'
-import { theme } from '../../core/theme'
+import { theme } from '../../../styles'
 import {
   StartScreen,
   LoginScreen,
