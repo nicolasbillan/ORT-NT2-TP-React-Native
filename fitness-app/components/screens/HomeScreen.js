@@ -4,6 +4,7 @@ import { FlatList, StyleSheet, Text, View } from "react-native";
 import { styles } from "../../styles";
 import { Datos, reducer } from "../../reducer";
 import { getExercises } from "../../helpers/fitnessApi";
+import ExercisePreview from "../elements/ExercisePreview";
 
 export default function App() {
   const [state, dispatch] = useReducer(reducer, Datos);
@@ -16,7 +17,7 @@ export default function App() {
         }
       })
       .then((data) => {
-        dispatch({ type: "STORE_EXERCISES", payload: data });
+        dispatch({ type: "STORE_EXERCISES", payload: { exercises: data } });
       })
       .catch((message) => {
         console.log(message);
@@ -26,6 +27,7 @@ export default function App() {
   return (
     <View style={styles.container}>
       <Text>WELCOME</Text>
+      <ExercisePreview excercise={{ nombre: "testing" }} />
     </View>
   );
 }

@@ -46,7 +46,7 @@ const storeExercises = async (exercises) => {
     });
     await AsyncStorage.setItem("exercises", JSON.stringify(exercises));
   } catch (e) {
-    console.log("Error" + e);
+    console.log("Error: " + e);
   }
 };
 
@@ -70,7 +70,7 @@ export const reducer = (state, action) => {
       return { ...state, loggedIn: false, token: null };
 
     case "STORE_EXERCISES":
-      storeExercises(action.payload);
-      return { ...state, exercises: action.payload };
+      storeExercises(action.payload.exercises);
+      return { ...state, exercises: action.payload.exercises };
   }
 };
