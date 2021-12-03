@@ -1,4 +1,5 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { exerciseTagParse } from "./helpers/exerciseTagParse";
 
 export let Datos = {
   username: "",
@@ -7,10 +8,13 @@ export let Datos = {
   token: "",
   loggedIn: false,
   exercises: [],
+  favorites: [],
 };
 
 const storeToken = async (email, value) => {
   try {
+    console.log("storeToken");
+    Datos.loggedIn = true;
     Datos.token = value;
     Datos.email = email;
     await AsyncStorage.setItem(
@@ -24,31 +28,21 @@ const storeToken = async (email, value) => {
 
 const storeExercises = async (exercises) => {
   try {
-    exercises = exercises.map((e) => {
-      let tags = [];
-      tags.push(e.nombre);
-      tags.push(e.dificultad);
-      tags.push(e.tipo);
-
-      if (Array.isArray(e.elementos)) {
-        e.elementos.forEach((element) => {
-          tags.push(element);
-        });
-      } else {
-        tags.push(e.elementos);
-      }
-
-      e["musculos principales"].forEach((element) => {
-        tags.push(element);
-      });
-
-      e["musculos secundarios"].forEach((element) => {
-        tags.push(element);
-      });
-      return { ...e, tags: tags };
-    });
+    console.log("storeExercises");
+    exercises = exercises.map(exerciseTagParse);
     Datos.exercises = exercises;
     await AsyncStorage.setItem("exercises", JSON.stringify(exercises));
+  } catch (e) {
+    console.log("Error: " + e);
+  }
+};
+
+const storeFavorites = async (exercises) => {
+  try {
+    console.log("storeFavorites");
+    exercises = exercises.map(exerciseTagParse);
+    Datos.favorites = exercises;
+    await AsyncStorage.setItem("favorites", JSON.stringify(exercises));
   } catch (e) {
     console.log("Error: " + e);
   }
@@ -72,6 +66,10 @@ export const reducer = (state, action) => {
     case "LOGOUT":
       storeToken(null);
       return { ...state, loggedIn: false, token: null };
+
+    case "STORE_FAVORITES":
+      storeFavorites(action.payload.favorites);
+      return { ...state, favorites: Datos.favorites };
 
     case "STORE_EXERCISES":
       storeExercises(action.payload.exercises);

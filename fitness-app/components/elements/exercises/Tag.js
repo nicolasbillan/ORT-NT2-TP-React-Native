@@ -1,6 +1,5 @@
 import React from "react";
-import { View, StyleSheet, Text } from "react-native";
-import { Button as PaperButton } from "react-native-paper";
+import { View, Text } from "react-native";
 import { styles } from "../../../styles";
 
 export default function Tag({ item }) {

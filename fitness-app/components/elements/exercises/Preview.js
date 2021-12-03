@@ -1,7 +1,6 @@
 import React from "react";
-import { View, StyleSheet, Text } from "react-native";
+import { View, Text } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
-import { Button as PaperButton } from "react-native-paper";
 import { styles } from "../../../styles";
 import Tag from "./Tag";
 
