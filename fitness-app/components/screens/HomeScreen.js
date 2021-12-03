@@ -4,9 +4,10 @@ import { FlatList, StyleSheet, Text, View } from "react-native";
 import { styles } from "../../styles";
 import { Datos, reducer } from "../../reducer";
 import { getExercises } from "../../helpers/fitnessApi";
-import ExercisePreview from "../elements/ExercisePreview";
+import ExercisePreview from "../elements/exercises/Preview";
+import { ScrollView } from "react-native-gesture-handler";
 
-export default function App() {
+export default function HomeScreen({ navigation }) {
   const [state, dispatch] = useReducer(reducer, Datos);
 
   useEffect(() => {
@@ -20,14 +21,21 @@ export default function App() {
         dispatch({ type: "STORE_EXERCISES", payload: { exercises: data } });
       })
       .catch((message) => {
+        navigation.navigate("Login");
         console.log(message);
       });
   }, []);
 
   return (
     <View style={styles.container}>
-      <Text>WELCOME</Text>
-      <ExercisePreview excercise={{ nombre: "testing" }} />
+      <ScrollView style={styles.scrollView}>
+        <Text>WELCOME</Text>
+        <FlatList
+          data={state.exercises}
+          renderItem={ExercisePreview}
+          keyExtractor={(item) => item._id}
+        />
+      </ScrollView>
     </View>
   );
 }

@@ -6,11 +6,13 @@ export let Datos = {
   email: "",
   token: "",
   loggedIn: false,
+  exercises: [],
 };
 
 const storeToken = async (email, value) => {
   try {
     Datos.token = value;
+    Datos.email = email;
     await AsyncStorage.setItem(
       "token",
       JSON.stringify({ email: email, token: value })
@@ -26,6 +28,7 @@ const storeExercises = async (exercises) => {
       let tags = [];
       tags.push(e.nombre);
       tags.push(e.dificultad);
+      tags.push(e.tipo);
 
       if (Array.isArray(e.elementos)) {
         e.elementos.forEach((element) => {
@@ -44,6 +47,7 @@ const storeExercises = async (exercises) => {
       });
       return { ...e, tags: tags };
     });
+    Datos.exercises = exercises;
     await AsyncStorage.setItem("exercises", JSON.stringify(exercises));
   } catch (e) {
     console.log("Error: " + e);
@@ -71,6 +75,6 @@ export const reducer = (state, action) => {
 
     case "STORE_EXERCISES":
       storeExercises(action.payload.exercises);
-      return { ...state, exercises: action.payload.exercises };
+      return { ...state, exercises: Datos.exercises };
   }
 };
