@@ -4,22 +4,25 @@ import { exerciseTagParse } from "./helpers/exerciseTagParse";
 export let Datos = {
   username: "",
   first_name: "",
+  userId: "",
   email: "",
   token: "",
   loggedIn: false,
   exercises: [],
   favorites: [],
+  routines: []
 };
 
-const storeToken = async (email, value) => {
+const storeToken = async (userId, email, value) => {
   try {
     console.log("storeToken");
     Datos.loggedIn = true;
     Datos.token = value;
     Datos.email = email;
+    Datos.userId = userId;
     await AsyncStorage.setItem(
       "token",
-      JSON.stringify({ email: email, token: value })
+      JSON.stringify({ userId: userId, email: email, token: value })
     );
   } catch (e) {
     // saving error
@@ -32,6 +35,16 @@ const storeExercises = async (exercises) => {
     exercises = exercises.map(exerciseTagParse);
     Datos.exercises = exercises;
     await AsyncStorage.setItem("exercises", JSON.stringify(exercises));
+  } catch (e) {
+    console.log("Error: " + e);
+  }
+};
+
+const storeRoutines = async (routines) => {
+  try {
+    console.log("storeRoutines");
+    Datos.routines = routines;
+    await AsyncStorage.setItem("routines", JSON.stringify(routines));
   } catch (e) {
     console.log("Error: " + e);
   }
@@ -54,10 +67,11 @@ const storeFavorites = async (exercises) => {
 export const reducer = (state, action) => {
   switch (action.type) {
     case "LOGIN":
-      storeToken(action.payload.email, action.payload.token);
+      storeToken(action.payload._id, action.payload.email, action.payload.token);
       Datos = {
         ...state,
         loggedIn: true,
+        userId: action.payload._id,
         token: action.payload.token,
         email: action.payload.email,
       };
@@ -65,7 +79,7 @@ export const reducer = (state, action) => {
 
     case "LOGOUT":
       storeToken(null);
-      return { ...state, loggedIn: false, token: null };
+      return { ...state, loggedIn: false, token: null, email: "", userId: "" };
 
     case "STORE_FAVORITES":
       storeFavorites(action.payload.favorites);
@@ -74,5 +88,9 @@ export const reducer = (state, action) => {
     case "STORE_EXERCISES":
       storeExercises(action.payload.exercises);
       return { ...state, exercises: Datos.exercises };
+
+    case "STORE_ROUTINES":
+      storeRoutines(action.payload.routines);
+      return { ...state, routines: Datos.routines };
   }
 };

@@ -28,6 +28,11 @@ export async function getRoutine(name) {
   return sendRequest(`${url}/${routinesRoute}/${name}`, "GET", null);
 }
 
+export async function getRoutinesForUser(userId) {
+  const user = sendRequest(`${url}/${usersRoute}/${userId}`, "GET", null);
+  return user.rutinas;
+}
+
 export async function getFavorites() {
   return sendRequest(`${url}/${excercisesRoute}/favoritos`, "GET", null);
 }
