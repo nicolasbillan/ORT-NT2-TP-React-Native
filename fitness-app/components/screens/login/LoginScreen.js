@@ -40,6 +40,10 @@ export default function LoginScreen({ navigation }) {
           type: "LOGIN",
           payload: { email: email.value, token: jsonResp.token },
         });
+        dispatch({
+          type: "STORE_ROUTINES",
+          payload: { routines: jsonResp.user.rutinas },
+        });
         navigation.navigate("childNav");
       })
       .catch((e) =>

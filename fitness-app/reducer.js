@@ -9,11 +9,11 @@ export let Datos = {
   loggedIn: false,
   exercises: [],
   favorites: [],
+  routines: [],
 };
 
 const storeToken = async (email, value) => {
   try {
-    console.log("storeToken");
     Datos.loggedIn = true;
     Datos.token = value;
     Datos.email = email;
@@ -26,9 +26,17 @@ const storeToken = async (email, value) => {
   }
 };
 
+const storeRoutines = async (routines) => {
+  try {
+    Datos.routines = routines;
+    await AsyncStorage.setItem("routines", JSON.stringify(routines));
+  } catch (e) {
+    console.log("Error: " + e);
+  }
+};
+
 const storeExercises = async (exercises) => {
   try {
-    console.log("storeExercises");
     exercises = exercises.map(exerciseTagParse);
     Datos.exercises = exercises;
     await AsyncStorage.setItem("exercises", JSON.stringify(exercises));
@@ -39,7 +47,6 @@ const storeExercises = async (exercises) => {
 
 const storeFavorites = async (exercises) => {
   try {
-    console.log("storeFavorites");
     exercises = exercises.map(exerciseTagParse);
     Datos.favorites = exercises;
     await AsyncStorage.setItem("favorites", JSON.stringify(exercises));
@@ -66,6 +73,10 @@ export const reducer = (state, action) => {
     case "LOGOUT":
       storeToken(null);
       return { ...state, loggedIn: false, token: null };
+
+    case "STORE_ROUTINES":
+      storeRoutines(action.payload.routines);
+      return { ...state, routines: Datos.routines };
 
     case "STORE_FAVORITES":
       storeFavorites(action.payload.favorites);
