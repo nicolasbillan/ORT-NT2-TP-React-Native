@@ -15,16 +15,14 @@ export default function App() {
         if (data) {
           return JSON.parse(data);
         }
-        AsyncStorage.getItem("token").then((userData) => {
+        return AsyncStorage.getItem("token").then((userData) => {
           if (userData) {
             const jsonData = JSON.parse(userData);
-            getRoutinesForUser(jsonData.userId);
-            dispatch({
-              type: "LOGIN",
-              payload: { userId: jsonData.userId, email: jsonData.email, token: jsonData.token },
-            });
+            return getRoutinesForUser(jsonData.userId);
+          } else {
+            throw "";
           }
-        });       
+        });
       })
       .then((data) => {
         dispatch({ type: "STORE_ROUTINES", payload: { routines: data } });

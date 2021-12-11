@@ -43,6 +43,7 @@ const storeExercises = async (exercises) => {
 const storeRoutines = async (routines) => {
   try {
     console.log("storeRoutines");
+    //exercises = exercises.map(exerciseTagParse);
     Datos.routines = routines;
     await AsyncStorage.setItem("routines", JSON.stringify(routines));
   } catch (e) {

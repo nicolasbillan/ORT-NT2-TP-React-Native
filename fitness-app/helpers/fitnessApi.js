@@ -29,7 +29,7 @@ export async function getRoutine(name) {
 }
 
 export async function getRoutinesForUser(userId) {
-  const user = sendRequest(`${url}/${usersRoute}/${userId}`, "GET", null);
+  let user = await sendRequest(`${url}/${usersRoute}/${userId}`, "GET", null);
   return user.rutinas;
 }
 

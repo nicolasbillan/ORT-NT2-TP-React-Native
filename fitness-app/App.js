@@ -19,7 +19,7 @@ export default function App() {
         const jsonData = JSON.parse(data);
         dispatch({
           type: "LOGIN",
-          payload: { email: jsonData.email, token: jsonData.token },
+          payload: { userId: jsonData.userId, email: jsonData.email, token: jsonData.token },
         });
       } else {
         throw "";
