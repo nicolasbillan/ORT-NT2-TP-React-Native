@@ -47,6 +47,14 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "bold",
   },
+  "routine-daytag":{
+    borderRadius: 5,
+    // borderWidth: 2.5,
+    backgroundColor: "red",
+    margin: 5,
+    paddingVertical: 2,
+    paddingHorizontal: 10 
+  }
 });
 
 const theme = {

@@ -14,17 +14,19 @@ export default function App() {
   const [state, dispatch] = useReducer(reducer, Datos);
 
   useEffect(() => {
-    AsyncStorage.getItem("token").then((data) => {
-      if (data) {
-        const jsonData = JSON.parse(data);
-        dispatch({
-          type: "LOGIN",
-          payload: { email: jsonData.email, token: jsonData.token },
-        });
-      } else {
-        throw "";
-      }
-    });
+    AsyncStorage.getItem("token")
+      .then((data) => {
+        if (data) {
+          const jsonData = JSON.parse(data);
+          dispatch({
+            type: "LOGIN",
+            payload: { email: jsonData.email, token: jsonData.token },
+          });
+        }
+      })
+      .catch((message) => {
+        console.log(message);
+      });
   }, []);
 
   return (

@@ -1,12 +1,12 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { useEffect, useState, useReducer } from "react";
+import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import { FlatList, Text, View } from "react-native";
-import { styles } from "../../styles";
-import { Datos, reducer } from "../../reducer";
-import { getExercises } from "../../helpers/fitnessApi";
-import ExercisePreview from "../elements/exercises/Preview";
-import { ScrollView } from "react-native-gesture-handler";
-import TextInput from "../elements/TextInput";
+import { styles } from "../../../styles";
+import { Datos, reducer } from "../../../reducer";
+import { getExercises } from "../../../helpers/fitnessApi";
+import ExercisePreview from "../../elements/exercises/Preview";
+import TextInput from "../../elements/TextInput";
 
 export default function HomeScreen({ navigation }) {
   const [state, dispatch] = useReducer(reducer, Datos);
