@@ -1,19 +1,44 @@
 import React from "react";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { BottomNavigation } from 'react-native-paper';
 import HomeNav from "./home/HomeNav";
 import RoutinesScreen from "./RoutinesScreen";
 import PreferencesScreen from "./PreferencesScreen";
 import FavoritesScreen from "./FavoritesScreen";
 
-const Tab = createBottomTabNavigator();
 
 export default function App() {
+  const [index, setIndex] = React.useState(0);
+  const [routes] = React.useState([
+    { key: 'home', title: 'Inicio', icon: 'home' },
+    {
+      key: 'routines',
+      title: 'Rutinas',
+      icon: 'run-fast'
+    },
+    {
+      key: 'favorites',
+      title: 'Favoritos',
+      icon: 'heart',
+      badge: true,
+    },
+    {
+      key: 'preferences',
+      title: 'Preferencias',
+      icon: 'cog'
+    },
+  ]);
+
   return (
-    <Tab.Navigator initialRouteName='Home'>
-      <Tab.Screen name='Home' component={HomeNav}></Tab.Screen>
-      <Tab.Screen name='Routines' component={RoutinesScreen}></Tab.Screen>
-      <Tab.Screen name='Favorites' component={FavoritesScreen}></Tab.Screen>
-      <Tab.Screen name='Preferences' component={PreferencesScreen}></Tab.Screen>
-    </Tab.Navigator>
+    <BottomNavigation
+      navigationState={{ index, routes }}
+      onIndexChange={index => setIndex(index)}
+      renderScene={BottomNavigation.SceneMap({
+        home: HomeNav,
+        routines: RoutinesScreen,
+        favorites: FavoritesScreen,
+        preferences: PreferencesScreen,
+      })}
+      sceneAnimationEnabled={false}
+    />
   );
 }
