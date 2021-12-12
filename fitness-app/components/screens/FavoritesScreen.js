@@ -31,10 +31,11 @@ export default function FavoritesScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <ScrollView style={styles.scrollView}>
-        <Text>FAVORITES</Text>
         <FlatList
           data={state.favorites}
-          renderItem={ExercisePreview}
+          renderItem={(item) => (
+            <ExercisePreview item={item} navigation={navigation} />
+          )}
           keyExtractor={(item) => item._id}
         />
       </ScrollView>
