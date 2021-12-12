@@ -46,9 +46,9 @@ export default function LoginScreen({ navigation }) {
         });
         navigation.navigate("childNav");
       })
-      .catch((e) =>
-        setPassword({ ...password, error: "Email o contraseña inválidos." })
-      );
+      .catch((e) => {
+        setPassword({ ...password, error: "Email o contraseña inválidos." });
+      });
   }
 
   return (

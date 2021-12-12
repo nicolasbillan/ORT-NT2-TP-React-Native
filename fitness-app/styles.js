@@ -27,6 +27,9 @@ const styles = StyleSheet.create({
     width: 30,
     height: 30,
   },
+  "search-box": {
+    padding: 10,
+  },
   tab: {
     alignItems: "center",
     justifyContent: "center",
@@ -43,18 +46,24 @@ const styles = StyleSheet.create({
     margin: 10,
     padding: 10,
   },
-  "excercise-title": { 
+  "excercise-title": {
     fontSize: 20,
     fontWeight: "bold",
   },
-  "routine-daytag":{
+  "big-title": {
+    fontSize: 50,
+    fontWeight: "bold",
+    alignSelf: "center",
+    textAlignVertical: "top",
+  },
+  "routine-daytag": {
     borderRadius: 5,
     // borderWidth: 2.5,
     backgroundColor: "red",
     margin: 5,
     paddingVertical: 2,
-    paddingHorizontal: 10 
-  }
+    paddingHorizontal: 10,
+  },
 });
 
 const theme = {

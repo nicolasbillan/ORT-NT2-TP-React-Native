@@ -46,6 +46,7 @@ export default function HomeScreen({ navigation }) {
       <ScrollView style={styles.scrollView}>
         <Text>WELCOME</Text>
         <TextInput
+          style={styles["search-box"]}
           label='Buscar'
           returnKeyType='next'
           value={filter}
@@ -53,7 +54,9 @@ export default function HomeScreen({ navigation }) {
         />
         <FlatList
           data={exercises}
-          renderItem={ExercisePreview}
+          renderItem={(item) => (
+            <ExercisePreview item={item} navigation={navigation} />
+          )}
           keyExtractor={(item) => item._id}
         />
       </ScrollView>
