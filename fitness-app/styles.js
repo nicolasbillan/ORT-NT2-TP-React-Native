@@ -18,9 +18,9 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     paddingHorizontal: 10,
+    color: "linear-gradient(141deg, #0fb8ad 0%, #1fc8db 51%, #2cb5e8 75%);"
   },
   scrollView: {
-    backgroundColor: "pink",
     marginHorizontal: 20,
   },
   "tab-icon": {
