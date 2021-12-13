@@ -3,7 +3,9 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import LoginNav from "./components/screens/login/LoginNav";
 import TabsScreen from "./components/screens/TabsScreen";
+import HeaderScreen from "./components/screens/HeaderScreen";
 import React, { useReducer, useEffect } from "react";
+import { IconButton } from 'react-native-paper';
 import GlobalContext from "./Context";
 import { Datos, reducer } from "./reducer";
 import { getExercises } from "./helpers/fitnessApi";
@@ -30,17 +32,32 @@ export default function App() {
   }, []);
 
   return (
-    <GlobalContext.Provider value={{ state, dispatch }}>
+      <GlobalContext.Provider value={{ state, dispatch }}>
       <NavigationContainer>
-        <Stack.Navigator
-          screenOptions={{
-            headerShown: false,
-          }}
-        >
+        <Stack.Navigator>          
           <Stack.Screen name='Login' component={LoginNav} />
-          <Stack.Screen name='childNav' component={TabsScreen} />
+          
+          <Stack.Screen name='childNav' component={TabsScreen} 
+            options={{
+              title: 'FitnessApp',
+              headerStyle: {
+                backgroundColor: '#6200ee',
+              },
+              headerTintColor: '#fff',
+              headerTitleStyle: {
+                fontWeight: 'bold',
+              },
+              headerLeft: () => (
+                <IconButton
+                  onPress={() => console.log('button pressed!')}
+                  color="#fff"
+                  icon="arrow-left"
+                />)
+            }}
+            />
         </Stack.Navigator>
       </NavigationContainer>
     </GlobalContext.Provider>
   );
+
 }
