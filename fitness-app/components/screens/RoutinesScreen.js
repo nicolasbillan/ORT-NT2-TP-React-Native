@@ -19,6 +19,16 @@ export default function App({ navigation }) {
         throw "";
       })
       .then((data) => {
+        let auxEx = Datos.exercises;
+        let auxExIdx = auxEx.reduce((a,x) => ({...a, [x._id]: x}), {});
+        let auxRout = data;
+        auxRout.forEach((r) =>
+        r.ejercicios.forEach((e, i, ar) => 
+          ar[i] = auxExIdx[e]));
+        return auxRout;
+      }
+      )
+      .then((data) => {
         if (data) {
           dispatch({ type: "STORE_ROUTINES", payload: { routines: data } });
         }
