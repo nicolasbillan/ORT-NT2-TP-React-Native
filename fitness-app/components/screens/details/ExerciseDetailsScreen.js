@@ -61,8 +61,9 @@ export default function ExerciseDetailsScreen({ navigation, ...props }) {
           data={exercise["musculos secundarios"]}
           renderItem={Tag}
           keyExtractor={(item) => item}
-        />
+        />        
       </View>
+      <Image source={require("../../../assets/animations/" + exercise.img)} style={{width: 300, height: 200}} />
       {/* <Video source={{ uri: "https://www.youtube.com/watch?v=B0p8iuh2sXg" }} ref={(ref) => (this.player = ref)} /> */}
     </View>
   );
