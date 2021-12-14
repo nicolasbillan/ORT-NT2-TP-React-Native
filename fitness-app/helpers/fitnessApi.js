@@ -3,6 +3,7 @@ const url = "https://blooming-ridge-70656.herokuapp.com/api";
 const usersRoute = "users";
 const excercisesRoute = "ejercicios";
 const routinesRoute = "rutinas";
+const favoritesRoute = "favoritos";
 import { Datos } from "../reducer.js";
 
 async function sendRequest(url, method, body) {
@@ -24,12 +25,24 @@ async function sendRequest(url, method, body) {
   });
 }
 
+export async function setFavorite(id) {
+  return sendRequest(
+    `${url}/${usersRoute}/${favoritesRoute}/${id}`,
+    "PUT",
+    null
+  );
+}
+
 export async function getRoutine(name) {
   return sendRequest(`${url}/${routinesRoute}/${name}`, "GET", null);
 }
 
 export async function getFavorites() {
-  return sendRequest(`${url}/${excercisesRoute}/favoritos`, "GET", null);
+  return sendRequest(
+    `${url}/${excercisesRoute}/${favoritesRoute}`,
+    "GET",
+    null
+  );
 }
 
 export async function getExercises() {
