@@ -37,6 +37,10 @@ export async function getRoutine(name) {
   return sendRequest(`${url}/${routinesRoute}/${name}`, "GET", null);
 }
 
+export async function getUser(userId) {
+  return sendRequest(`${url}/${userRoute}/${userId}`, "GET", null);
+}
+
 export async function getFavorites() {
   return sendRequest(
     `${url}/${excercisesRoute}/${favoritesRoute}`,

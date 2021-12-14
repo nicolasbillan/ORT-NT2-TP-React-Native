@@ -38,7 +38,7 @@ export default function LoginScreen({ navigation }) {
       .then((jsonResp) => {
         dispatch({
           type: "LOGIN",
-          payload: { email: email.value, token: jsonResp.token },
+          payload: { _id: jsonResp.user._id, email: email.value, token: jsonResp.token },
         });
         dispatch({
           type: "STORE_ROUTINES",

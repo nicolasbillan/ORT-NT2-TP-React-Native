@@ -4,6 +4,7 @@ import { exerciseTagParse } from "./helpers/exerciseTagParse";
 export let Datos = {
   username: "",
   first_name: "",
+  userId: "",
   email: "",
   token: "",
   loggedIn: false,
@@ -12,14 +13,15 @@ export let Datos = {
   routines: [],
 };
 
-const storeToken = async (email, value) => {
+const storeToken = async (userId, email, value) => {
   try {
     Datos.loggedIn = true;
     Datos.token = value;
     Datos.email = email;
+    Datos.userId = userId;
     await AsyncStorage.setItem(
       "token",
-      JSON.stringify({ email: email, token: value })
+      JSON.stringify({ userId: userId, email: email, token: value })
     );
   } catch (e) {
     // saving error
@@ -61,10 +63,11 @@ const storeFavorites = async (exercises) => {
 export const reducer = (state, action) => {
   switch (action.type) {
     case "LOGIN":
-      storeToken(action.payload.email, action.payload.token);
+      storeToken(action.payload._id, action.payload.email, action.payload.token);
       Datos = {
         ...state,
         loggedIn: true,
+        userId: action.payload._id,
         token: action.payload.token,
         email: action.payload.email,
       };
@@ -72,7 +75,7 @@ export const reducer = (state, action) => {
 
     case "LOGOUT":
       storeToken(null);
-      return { ...state, loggedIn: false, token: null };
+      return { ...state, loggedIn: false, token: null, userId: "" };
 
     case "STORE_ROUTINES":
       storeRoutines(action.payload.routines);

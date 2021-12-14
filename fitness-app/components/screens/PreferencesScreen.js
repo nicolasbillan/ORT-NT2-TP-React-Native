@@ -7,6 +7,8 @@ import { styles } from "../../styles";
 export default function App({ navigation }) {
   const [state, dispatch] = useReducer(reducer, Datos);
 
+
+
   return (
     <View style={styles.container}>
       <Text>PREFERENCES</Text>
