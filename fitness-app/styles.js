@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     paddingHorizontal: 10,
-    color: "linear-gradient(141deg, #0fb8ad 0%, #1fc8db 51%, #2cb5e8 75%);"
+    color: "linear-gradient(141deg, #0fb8ad 0%, #1fc8db 51%, #2cb5e8 75%);",
   },
   scrollView: {
     marginHorizontal: 20,
@@ -63,6 +63,11 @@ const styles = StyleSheet.create({
     margin: 5,
     paddingVertical: 2,
     paddingHorizontal: 10,
+  },
+  "fav-icon": {
+    alignSelf: "center",
+    width: 50,
+    height: 50, 
   },
 });
 

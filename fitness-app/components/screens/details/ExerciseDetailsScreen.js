@@ -1,14 +1,48 @@
-import React from "react";
-import { FlatList, StyleSheet, Text, View } from "react-native";
+import React, { useState } from "react";
+import { FlatList, Pressable, Text, View, Image } from "react-native";
 // import Video from "react-native-video";
 import { styles } from "../../../styles";
 import Tag from "../../elements/exercises/Tag";
+import { setFavorite } from "../../../helpers/fitnessApi";
 
-export default function ExerciseDetailsScreen({ ...props }) {
+export default function ExerciseDetailsScreen({ navigation, ...props }) {
   const { exercise } = props.route.params;
+  // const { navigation } = props;
+  const [isFav, setFav] = useState(exercise.fav);
+
+  let waiting = false;
+
+  const onFavoritePress = () => {
+    if (waiting) return;
+    waiting = true;
+    setFavorite(exercise._id)
+      .then(() => {
+        setFav(!isFav);
+      })
+      .catch((message) => {
+        //dispatch({ type: "LOGOUT" });
+        navigation.navigate("Login");
+        console.log(message);
+      })
+      .finally(() => (waiting = false));
+  };
+
   return (
     <View style={{ ...styles.container, alignContent: "top" }}>
-      <Text style={styles["big-title"]}>{exercise.nombre}</Text>
+      <View style={{ flexDirection: "row", justifyContent: "center" }}>
+        <Text style={styles["big-title"]}>{exercise.nombre}</Text>
+        <Pressable
+          style={{ padding: 10, margin: 10 }}
+          onPress={onFavoritePress}
+        >
+          <Image
+            source={require(`../../../assets/${
+              isFav ? "fav-full" : "fav-empty"
+            }.png`)}
+            style={styles["fav-icon"]}
+          />
+        </Pressable>
+      </View>
       <Text>{`Tipo: ${exercise.tipo}`}</Text>
       <Text>{`Dificultad: ${exercise.dificultad}`}</Text>
       <View>
