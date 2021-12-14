@@ -29,7 +29,7 @@ export default function ExerciseDetailsScreen({ ...props }) {
           keyExtractor={(item) => item}
         />        
       </View>
-      <Image source={require("../../../assets/animations/burpee_orig.gif")} style={{width: 300, height: 200}} />
+      <Image source={require("../../../assets/animations/" + exercise.img)} style={{width: 300, height: 200}} />
       {/* <Video source={{ uri: "https://www.youtube.com/watch?v=B0p8iuh2sXg" }} ref={(ref) => (this.player = ref)} /> */}
     </View>
   );
